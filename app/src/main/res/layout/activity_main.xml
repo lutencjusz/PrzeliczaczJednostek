@@ -12,30 +12,27 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edNumberLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/purple_200">
+
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/NUmber"
             android:autofillHints="@string/value"
             android:hint="@string/value"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        style="@style/CustomButton"
         android:id="@+id/btnMeter"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="@string/btnMeter"
-        android:textColor="@color/purple_200"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btnYard"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="@string/btnYard"
-        android:textColor="@color/purple_200"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="@string/btnMeter" />
 
+    <Button
+        style="@style/CustomButton"
+        android:id="@+id/btnYard"
+        android:text="@string/btnYard" />
 
 </LinearLayout>

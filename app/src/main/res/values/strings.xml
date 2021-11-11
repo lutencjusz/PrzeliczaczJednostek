@@ -3,4 +3,7 @@
     <string name="value">Podaj wielkość</string>
     <string name="btnMeter">Metry</string>
     <string name="btnYard">Jardy</string>
+    <string name="tekst">tekst</string>
+    <string name="formatMeter">%s metrów</string>
+    <string name="formatYards">%s jardów</string>
 </resources>
