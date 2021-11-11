@@ -4,6 +4,14 @@
     <string name="btnMeter">Metry</string>
     <string name="btnYard">Jardy</string>
     <string name="tekst">tekst</string>
-    <string name="formatMeter">%s metrów</string>
+    <string name="formatMeter">%s m</string>
     <string name="formatYards">%s jardów</string>
+    <string name="formatFeet">%s stóp</string>
+    <string name="formatInch">%s cali</string>
+    <string name="formatMileL">%s mil lądowych</string>
+    <string name="formatMileM">%s mil morskich</string>
+    <string name="mileM">Mile morskie</string>
+    <string name="mileL">Mile lądowe</string>
+    <string name="foot">Stopa</string>
+    <string name="inch">Cale</string>
 </resources>

@@ -26,13 +26,33 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        style="@style/CustomButton"
         android:id="@+id/btnMeter"
+        style="@style/CustomButton"
         android:text="@string/btnMeter" />
 
     <Button
-        style="@style/CustomButton"
         android:id="@+id/btnYard"
+        style="@style/CustomButton"
         android:text="@string/btnYard" />
+
+    <Button
+        android:id="@+id/btnMileM"
+        style="@style/CustomButton"
+        android:text="@string/mileM" />
+
+    <Button
+        android:id="@+id/btnMileL"
+        style="@style/CustomButton"
+        android:text="@string/mileL" />
+
+    <Button
+        android:id="@+id/btnFoot"
+        style="@style/CustomButton"
+        android:text="@string/foot" />
+
+    <Button
+        android:id="@+id/btnInch"
+        style="@style/CustomButton"
+        android:text="@string/inch" />
 
 </LinearLayout>

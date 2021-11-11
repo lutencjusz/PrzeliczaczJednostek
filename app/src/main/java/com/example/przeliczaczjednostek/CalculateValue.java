@@ -2,17 +2,70 @@ package com.example.przeliczaczjednostek;
 
 public class CalculateValue {
     static final double YARD = 1.093613;
+    static final double FEET = 3.280839895;
+    static final double INCH = 39.370;
+    static final double MILEM = 0.00054;
+    static final double MILEL = 0.0006215;
+
     private double meter;
     private double yard;
+    private double feet;
+    private double inch;
+    private double mileL;
+    private double mileM;
 
-    public void CalculateMeter(double meterValue) {
+    public void calculateMeter(double meterValue) {
         this.meter = meterValue;
         this.yard = meterValue * YARD;
+        this.feet = meterValue * FEET;
+        this.inch = meterValue * INCH;
+        this.mileM = meterValue * MILEM;
+        this.mileL = meterValue * MILEL;
     }
 
-    public void CalculateYard(double yardValue) {
+    public void calculateYard(double yardValue) {
         this.yard = yardValue;
         this.meter = yardValue / YARD;
+        this.feet = this.meter * FEET;
+        this.inch = this.meter * INCH;
+        this.mileM = this.meter * MILEM;
+        this.mileL = this.meter * MILEL;
+    }
+
+    public void calculateFoot(double footValue) {
+        this.feet = footValue;
+        this.meter = footValue / FEET;
+        this.yard = this.meter * YARD;
+        this.inch = this.meter * INCH;
+        this.mileM = this.meter * MILEM;
+        this.mileL = this.meter * MILEL;
+    }
+
+    public void calculateInch(double inchValue) {
+        this.inch = inchValue;
+        this.meter = inchValue / INCH;
+        this.yard = this.meter * YARD;
+        this.feet = this.meter * FEET;
+        this.mileM = this.meter * MILEM;
+        this.mileL = this.meter * MILEL;
+    }
+
+    public void calculateMileL(double mileLvalue) {
+        this.mileL = mileLvalue;
+        this.meter = mileLvalue / MILEL;
+        this.yard = this.meter * YARD;
+        this.feet = this.meter * FEET;
+        this.mileM = this.meter * MILEM;
+        this.inch = this.meter * INCH;
+    }
+
+    public void calculateMileM(double mileMvalue) {
+        this.mileM = mileMvalue;
+        this.meter = mileMvalue / MILEM;
+        this.yard = this.meter * YARD;
+        this.feet = this.meter * FEET;
+        this.inch = this.meter * INCH;
+        this.mileL = this.meter * MILEL;
     }
 
     public double getMeter() {
@@ -22,4 +75,21 @@ public class CalculateValue {
     public double getYard() {
         return yard;
     }
+
+    public double getFeet() {
+        return feet;
+    }
+
+    public double getInch() {
+        return inch;
+    }
+
+    public double getMileL() {
+        return mileL;
+    }
+
+    public double getMileM() {
+        return mileM;
+    }
+
 }
