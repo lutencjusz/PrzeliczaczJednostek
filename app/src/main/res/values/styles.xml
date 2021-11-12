@@ -5,5 +5,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:onClick">onClick</item>
         <item name="android:textColor">@color/purple_200</item>
+        <item name="android:textAppearance">@color/purple_200</item>
+        <item name="android:textSize">20dp</item>
     </style>
 </resources>
