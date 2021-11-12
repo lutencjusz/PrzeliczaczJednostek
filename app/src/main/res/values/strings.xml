@@ -14,4 +14,5 @@
     <string name="mileL">Mile lądowe</string>
     <string name="foot">Stopa</string>
     <string name="inch">Cale</string>
+    <string name="default_value">1</string>
 </resources>

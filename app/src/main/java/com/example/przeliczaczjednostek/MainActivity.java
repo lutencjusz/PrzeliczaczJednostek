@@ -1,7 +1,10 @@
 package com.example.przeliczaczjednostek;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private CalculateValue calculateValue;
     private DecimalFormat df;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
         etValue = findViewById(R.id.edNumber);
         calculateValue = new CalculateValue();
         df = new DecimalFormat();
-        df.setMaximumFractionDigits(3);
+        df.setMaximumFractionDigits(4);
         df.setMinimumFractionDigits(0);
     }
 
     public void onClick(View view) {
+        if (etValue.getText().length() == 0) {
+            etValue.setText(R.string.default_value);
+        }
         double value = Double.parseDouble(etValue.getText().toString());
         if (view.getId() == R.id.btnMeter) {
             calculateValue.calculateMeter(value);
@@ -60,4 +67,5 @@ public class MainActivity extends AppCompatActivity {
         btnMileL.setText(String.format(getString(R.string.formatMileL), df.format(calculateValue.getMileL())));
         btnMileM.setText(String.format(getString(R.string.formatMileM), df.format(calculateValue.getMileM())));
     }
+
 }
