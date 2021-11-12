@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PrzeliczaczJednostek</string>
+    <string name="app_name">Przeliczacz jednostek</string>
     <string name="value">Podaj wielkość</string>
     <string name="btnMeter">Metry</string>
     <string name="btnYard">Jardy</string>
