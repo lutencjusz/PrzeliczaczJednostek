@@ -5,6 +5,12 @@
       <map>
         <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/drawable/button_bg.xml" value="0.21770833333333334" />
         <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/layout/app_bar_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/mipmap-anydpi-v26/ic_flag_sq.xml" value="0.22135416666666666" />
+        <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22135416666666666" />
+        <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/mipmap-anydpi-v26/ic_pl_flag.xml" value="0.22135416666666666" />
+        <entry key="..\:/Data/Android/PrzeliczaczJednostek/app/src/main/res/mipmap-anydpi-v26/ic_uk_flag.xml" value="0.21770833333333334" />
       </map>
     </option>
   </component>
