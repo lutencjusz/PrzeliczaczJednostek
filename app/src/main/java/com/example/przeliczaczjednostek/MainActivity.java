@@ -3,9 +3,11 @@ package com.example.przeliczaczjednostek;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private DecimalFormat df;
     private Resources resources;
     private Configuration configuration;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,11 +38,18 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void updateContentView(Locale locale) {
+    private void saveCurrentLanguage() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getString(R.string.SharedPreferencesValue), configuration.getLocales().get(0).getLanguage());
+        editor.apply();
+    }
+
+    private void updateContentViewAndLang(Locale locale) {
         configuration.setLocale(locale);
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
+        saveCurrentLanguage();
     }
 
     @Override
@@ -49,17 +59,17 @@ public class MainActivity extends AppCompatActivity {
             this.finishAffinity();
             return true;
         } else if (id == R.id.eng_flag) {
-            updateContentView(new Locale("en"));
+            updateContentViewAndLang(new Locale("en"));
             return true;
         } else if (id == R.id.pl_flag) {
-            updateContentView(new Locale("pl"));
+            updateContentViewAndLang(new Locale("pl"));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void bindAll(){
+    private void bindAll() {
         btnMeter = findViewById(R.id.btnMeter);
         btnYard = findViewById(R.id.btnYard);
         btnFoot = findViewById(R.id.btnFoot);
@@ -75,7 +85,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         resources = this.getResources();
         configuration = resources.getConfiguration();
-        updateContentView(configuration.getLocales().get(0));
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        updateContentViewAndLang(sharedPreferences.getString(getString(R.string.SharedPreferencesValue), "").equals("")
+                ? configuration.getLocales().get(0)
+                : new Locale(sharedPreferences.getString(getString(R.string.SharedPreferencesValue), "")));
         bindAll();
         calculateValue = new CalculateValue();
         df = new DecimalFormat();

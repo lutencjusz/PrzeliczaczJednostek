@@ -18,4 +18,5 @@
     <string name="uk_flag_title" translatable="false">English</string>
     <string name="pl_flag_title" translatable="false">Polski</string>
     <string name="exit_title">Wyjście z aplikacji</string>
+    <string name="SharedPreferencesValue" translatable="false">LANG</string>
 </resources>
