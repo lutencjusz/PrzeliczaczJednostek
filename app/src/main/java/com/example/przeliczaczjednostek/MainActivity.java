@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import java.text.DecimalFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         configuration.setLocale(locale);
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
         setContentView(R.layout.activity_main);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
     }
 
     @Override
@@ -57,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void bindAll(){
+        btnMeter = findViewById(R.id.btnMeter);
+        btnYard = findViewById(R.id.btnYard);
+        btnFoot = findViewById(R.id.btnFoot);
+        btnInch = findViewById(R.id.btnInch);
+        btnMileL = findViewById(R.id.btnMileL);
+        btnMileM = findViewById(R.id.btnMileM);
+        etValue = findViewById(R.id.edNumber);
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +76,7 @@ public class MainActivity extends AppCompatActivity {
         resources = this.getResources();
         configuration = resources.getConfiguration();
         updateContentView(configuration.getLocales().get(0));
-
-        btnMeter = findViewById(R.id.btnMeter);
-        btnYard = findViewById(R.id.btnYard);
-        btnFoot = findViewById(R.id.btnFoot);
-        btnInch = findViewById(R.id.btnInch);
-        btnMileL = findViewById(R.id.btnMileL);
-        btnMileM = findViewById(R.id.btnMileM);
-
-        etValue = findViewById(R.id.edNumber);
+        bindAll();
         calculateValue = new CalculateValue();
         df = new DecimalFormat();
         df.setMaximumFractionDigits(4);
@@ -80,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
+
+        bindAll();
         if (etValue.getText().length() == 0) {
             etValue.setText(R.string.default_value);
         }
@@ -97,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (view.getId() == R.id.btnMileM) {
             calculateValue.calculateMileM(value);
         }
+
         btnMeter.setText(String.format(getString(R.string.formatMeter), df.format(calculateValue.getMeter())));
         btnYard.setText(String.format(getString(R.string.formatYards), df.format(calculateValue.getYard())));
         btnFoot.setText(String.format(getString(R.string.formatFeet), df.format(calculateValue.getFeet())));

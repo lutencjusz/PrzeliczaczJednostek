@@ -6,4 +6,13 @@
     <string name="btnYard">Yards</string>
     <string name="inch">Inches</string>
     <string name="formatYards">%s yd (yard)</string>
+    <string name="exit_title">Exit</string>
+    <string name="foot">Foot</string>
+    <string name="mileL">Land mile</string>
+    <string name="mileM">Nautical mile</string>
+    <string name="formatMeter">%s m (meter)</string>
+    <string name="formatFeet">%s ft (foot)</string>
+    <string name="formatInch">%s\" (inch)</string>
+    <string name="formatMileL">%s mi (land mile)</string>
+    <string name="formatMileM">%s Nm (nautical mile)</string>
 </resources>
