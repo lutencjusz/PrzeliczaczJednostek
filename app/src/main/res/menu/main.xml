@@ -4,16 +4,16 @@
     <item
         android:id="@+id/eng_flag"
         android:icon="@mipmap/ic_uk_flag_sq"
-        android:title="uk_flag"
+        android:title="@string/uk_flag_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/pl_flag"
         android:icon="@mipmap/ic_pl_flag_sq"
-        android:title="pl_flag"
+        android:title="@string/pl_flag_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/exit"
         android:icon="@drawable/ic_exit"
-        android:title="exit"
+        android:title="@string/exit_title"
         app:showAsAction="ifRoom" />
 </menu>

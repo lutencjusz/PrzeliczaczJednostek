@@ -5,7 +5,7 @@
     <string name="btnYard">Jardy</string>
     <string name="tekst">tekst</string>
     <string name="formatMeter">%s m (metr)</string>
-    <string name="formatYards">%s yd (jard)</string>
+    <string name="formatYards">%s jd (jard)</string>
     <string name="formatFeet">%s\' (stopa)</string>
     <string name="formatInch">%s\" (cal)</string>
     <string name="formatMileL">%s mi (mila lądowa)</string>
@@ -14,5 +14,8 @@
     <string name="mileL">Mile lądowe</string>
     <string name="foot">Stopa</string>
     <string name="inch">Cale</string>
-    <string name="default_value">1</string>
+    <string name="default_value" translatable="false">1</string>
+    <string name="uk_flag_title">uk_flag</string>
+    <string name="pl_flag_title">pl_flag</string>
+    <string name="exit_title">exit</string>
 </resources>

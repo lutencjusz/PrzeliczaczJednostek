@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Unit converter</string>
+    <string name="value">Enter value</string>
+    <string name="btnMeter">Meters</string>
+    <string name="btnYard">Yards</string>
+    <string name="inch">Inches</string>
+    <string name="formatYards">%s yd (yard)</string>
+</resources>
