@@ -3,16 +3,16 @@ package com.example.przeliczaczjednostek;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnMileL;
     private CalculateValue calculateValue;
     private DecimalFormat df;
+    private Resources resources;
+    private Configuration configuration;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,13 +34,26 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    private void updateContentView(Locale locale) {
+        configuration.setLocale(locale);
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        setContentView(R.layout.activity_main);
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id==R.id.exit){
-            Toast.makeText(this, "Wybrałes exit", Toast.LENGTH_SHORT).show();
+        if (id == R.id.exit) {
+            this.finishAffinity();
+            return true;
+        } else if (id == R.id.eng_flag) {
+            updateContentView(new Locale("en"));
+            return true;
+        } else if (id == R.id.pl_flag) {
+            updateContentView(new Locale("pl"));
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -46,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        resources = this.getResources();
+        configuration = resources.getConfiguration();
+        updateContentView(configuration.getLocales().get(0));
 
         btnMeter = findViewById(R.id.btnMeter);
         btnYard = findViewById(R.id.btnYard);
