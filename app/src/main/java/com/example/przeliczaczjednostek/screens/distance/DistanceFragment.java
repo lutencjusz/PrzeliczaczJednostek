@@ -7,15 +7,21 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import com.example.przeliczaczjednostek.App;
 import com.example.przeliczaczjednostek.CalculateValue;
+import com.example.przeliczaczjednostek.PlActionEvent;
 import com.example.przeliczaczjednostek.R;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 public class DistanceFragment extends Fragment {
 
@@ -31,6 +37,7 @@ public class DistanceFragment extends Fragment {
     private Resources resources;
     private Configuration configuration;
     private SharedPreferences sharedPreferences;
+    private Bus bus;
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,7 +45,7 @@ public class DistanceFragment extends Fragment {
 //        return true;
 //    }
 
-    private void saveCurrentLanguage() {
+    private void saveCurrentLanguageInSharedPreferences() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.SharedPreferencesValue), configuration.getLocales().get(0).getLanguage());
         editor.apply();
@@ -79,11 +86,36 @@ public class DistanceFragment extends Fragment {
         etValue = etValue.findViewById(R.id.edNumber);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        calculateValue = new CalculateValue();
+        df = new DecimalFormat();
+        df.setMaximumFractionDigits(4);
+        df.setMinimumFractionDigits(0);
+        bus = ((App) getActivity().getApplication()).getBus();
+        resources = this.getResources();
+        configuration = resources.getConfiguration();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_distance, container, false);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        bus.register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        bus.unregister(this);
     }
 
     //    @SuppressLint("ClickableViewAccessibility")
@@ -102,6 +134,13 @@ public class DistanceFragment extends Fragment {
 //        df.setMaximumFractionDigits(4);
 //        df.setMinimumFractionDigits(0);
 //    }
+
+    @Subscribe
+    public void onPlActionEvent(PlActionEvent event) {
+        configuration.setLocale(new Locale("pl"));
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        saveCurrentLanguageInSharedPreferences();
+    }
 
     public void onClick(View view) {
 
