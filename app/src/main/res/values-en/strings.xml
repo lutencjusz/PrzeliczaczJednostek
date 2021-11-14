@@ -15,4 +15,8 @@
     <string name="formatInch">%s\" (inch)</string>
     <string name="formatMileL">%s mi (land mile)</string>
     <string name="formatMileM">%s Nm (nautical mile)</string>
+    <string name="menu_scale">Scales</string>
+    <string name="menu_capacity">Capacity</string>
+    <string name="menu_distance">Distance</string>
+    <string name="nav_exit">Exit</string>
 </resources>

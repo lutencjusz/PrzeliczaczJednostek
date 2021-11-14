@@ -32,9 +32,9 @@ public class CalculateValue {
         this.mileL = this.meter * MILEL;
     }
 
-    public void calculateFoot(double footValue) {
-        this.feet = footValue;
-        this.meter = footValue / FEET;
+    public void calculateFeet(double feetValue) {
+        this.feet = feetValue;
+        this.meter = feetValue / FEET;
         this.yard = this.meter * YARD;
         this.inch = this.meter * INCH;
         this.mileM = this.meter * MILEM;
@@ -92,4 +92,19 @@ public class CalculateValue {
         return mileM;
     }
 
+    public void calculate(double value, String unit) {
+        if (unit.equals("meter")) {
+            calculateMeter(value);
+        } else if (unit.equals("yard")) {
+            calculateYard(value);
+        } else if (unit.equals("feet")) {
+            calculateFeet(value);
+        } else if (unit.equals("inch")) {
+            calculateInch(value);
+        } else if (unit.equals("mileL")) {
+            calculateMileL(value);
+        } else if (unit.equals("mileM")) {
+            calculateMileM(value);
+        }
+    }
 }

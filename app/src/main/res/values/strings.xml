@@ -17,7 +17,7 @@
     <string name="default_value" translatable="false">1</string>
     <string name="uk_flag_title" translatable="false">English</string>
     <string name="pl_flag_title" translatable="false">Polski</string>
-    <string name="exit_title">Wyjście z aplikacji</string>
+    <string name="exit_title">Zakończ</string>
     <string name="SharedPreferencesValue" translatable="false">LANG</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
