@@ -1,128 +1,90 @@
 package com.example.przeliczaczjednostek;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import java.text.DecimalFormat;
-import java.util.Locale;
-import java.util.Objects;
+import android.view.Menu;
+import com.example.przeliczaczjednostek.screens.distance.DistanceFragment;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.przeliczaczjednostek.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private EditText etValue;
-    private Button btnMeter;
-    private Button btnYard;
-    private Button btnFoot;
-    private Button btnInch;
-    private Button btnMileM;
-    private Button btnMileL;
-    private CalculateValue calculateValue;
-    private DecimalFormat df;
-    private Resources resources;
-    private Configuration configuration;
-    private SharedPreferences sharedPreferences;
+    private AppBarConfiguration mAppBarConfiguration;
+    private ActivityMainBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.appBarMain.toolbar);
+        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        DrawerLayout drawer = binding.drawerLayout;
+        NavigationView navigationView = binding.navView;
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                .setOpenableLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.container);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        navigationView.setNavigationItemSelectedListener(this);
+//        NavigationUI.setupWithNavController(navigationView, navController);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    private void saveCurrentLanguage() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(getString(R.string.SharedPreferencesValue), configuration.getLocales().get(0).getLanguage());
-        editor.apply();
-    }
-
-    private void updateContentViewAndLang(Locale locale) {
-        configuration.setLocale(locale);
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-        setContentView(R.layout.activity_main);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.app_name);
-        saveCurrentLanguage();
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.container);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.exit) {
-            this.finishAffinity();
-            return true;
-        } else if (id == R.id.eng_flag) {
-            updateContentViewAndLang(new Locale("en"));
-            return true;
-        } else if (id == R.id.pl_flag) {
-            updateContentViewAndLang(new Locale("pl"));
-            return true;
+        if (id == R.id.nav_distance) {
+            showFragment(new DistanceFragment());
+        } else if (id == R.id.nav_scale) {
+
+        } else if (id == R.id.nav_capacity) {
+
         }
 
-        return super.onOptionsItemSelected(item);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
-    private void bindAll() {
-        btnMeter = findViewById(R.id.btnMeter);
-        btnYard = findViewById(R.id.btnYard);
-        btnFoot = findViewById(R.id.btnFoot);
-        btnInch = findViewById(R.id.btnInch);
-        btnMileL = findViewById(R.id.btnMileL);
-        btnMileM = findViewById(R.id.btnMileM);
-        etValue = findViewById(R.id.edNumber);
+    private void showFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
-
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        resources = this.getResources();
-        configuration = resources.getConfiguration();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        updateContentViewAndLang(sharedPreferences.getString(getString(R.string.SharedPreferencesValue), "").equals("")
-                ? configuration.getLocales().get(0)
-                : new Locale(sharedPreferences.getString(getString(R.string.SharedPreferencesValue), "")));
-        bindAll();
-        calculateValue = new CalculateValue();
-        df = new DecimalFormat();
-        df.setMaximumFractionDigits(4);
-        df.setMinimumFractionDigits(0);
-    }
-
-    public void onClick(View view) {
-
-        bindAll();
-        if (etValue.getText().length() == 0) {
-            etValue.setText(R.string.default_value);
-        }
-        double value = Double.parseDouble(etValue.getText().toString());
-        if (view.getId() == R.id.btnMeter) {
-            calculateValue.calculateMeter(value);
-        } else if (view.getId() == R.id.btnYard) {
-            calculateValue.calculateYard(value);
-        } else if (view.getId() == R.id.btnFoot) {
-            calculateValue.calculateFoot(value);
-        } else if (view.getId() == R.id.btnInch) {
-            calculateValue.calculateInch(value);
-        } else if (view.getId() == R.id.btnMileL) {
-            calculateValue.calculateMileL(value);
-        } else if (view.getId() == R.id.btnMileM) {
-            calculateValue.calculateMileM(value);
-        }
-
-        btnMeter.setText(String.format(getString(R.string.formatMeter), df.format(calculateValue.getMeter())));
-        btnYard.setText(String.format(getString(R.string.formatYards), df.format(calculateValue.getYard())));
-        btnFoot.setText(String.format(getString(R.string.formatFeet), df.format(calculateValue.getFeet())));
-        btnInch.setText(String.format(getString(R.string.formatInch), df.format(calculateValue.getInch())));
-        btnMileL.setText(String.format(getString(R.string.formatMileL), df.format(calculateValue.getMileL())));
-        btnMileM.setText(String.format(getString(R.string.formatMileM), df.format(calculateValue.getMileM())));
-    }
-
 }

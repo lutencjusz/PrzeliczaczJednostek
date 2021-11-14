@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/paddingValue"
+    android:paddingRight="@dimen/paddingValue"
+    tools:context=".screens.distance.DistanceFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edNumberLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/purple_200">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/value"
+            android:hint="@string/value"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnMeter"
+        style="@style/CustomButton"
+        android:text="@string/btnMeter" />
+
+    <Button
+        android:id="@+id/btnYard"
+        style="@style/CustomButton"
+        android:text="@string/btnYard" />
+
+    <Button
+        android:id="@+id/btnMileM"
+        style="@style/CustomButton"
+        android:text="@string/mileM" />
+
+    <Button
+        android:id="@+id/btnMileL"
+        style="@style/CustomButton"
+        android:text="@string/mileL" />
+
+    <Button
+        android:id="@+id/btnFoot"
+        style="@style/CustomButton"
+        android:text="@string/foot" />
+
+    <Button
+        android:id="@+id/btnInch"
+        style="@style/CustomButton"
+        android:text="@string/inch" />
+
+</LinearLayout>

@@ -11,13 +11,19 @@
         android:theme="@style/Theme.PrzeliczaczJednostek">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.PrzeliczaczJednostek.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".screens.distance.DistanceFragment"
+            android:exported="false"/>
     </application>
 
 </manifest>
