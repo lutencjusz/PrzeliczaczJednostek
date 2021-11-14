@@ -5,11 +5,11 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
+import com.example.przeliczaczjednostek.databinding.ActivityMainBinding;
 import com.example.przeliczaczjednostek.events.PlActionEvent;
 import com.example.przeliczaczjednostek.screens.distance.DistanceFragment;
 import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -18,7 +18,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.przeliczaczjednostek.databinding.ActivityMainBinding;
 import com.squareup.otto.Bus;
 import java.util.Locale;
 
@@ -42,15 +41,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(binding.appBarMain.toolbar);
 
         DrawerLayout drawer = binding.drawerLayout;
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, binding.appBarMain.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_distance_mobile, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.container);
@@ -101,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.eng_flag) {
             changeLanguageAndRefresh("en");
         } else if (id==R.id.exit){
-            this.finishAffinity();
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -134,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_capacity) {
 
         } else if (id == R.id.nav_exit) {
-            this.finishAffinity();
+            this.finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
