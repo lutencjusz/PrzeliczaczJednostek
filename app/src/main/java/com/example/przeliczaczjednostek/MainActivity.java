@@ -5,12 +5,11 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
-import com.example.przeliczaczjednostek.events.DistanceFragmentActionEvent;
-import com.example.przeliczaczjednostek.events.EnActionEvent;
 import com.example.przeliczaczjednostek.events.PlActionEvent;
 import com.example.przeliczaczjednostek.screens.distance.DistanceFragment;
 import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -21,9 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.przeliczaczjednostek.databinding.ActivityMainBinding;
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 import java.util.Locale;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(binding.appBarMain.toolbar);
 
         DrawerLayout drawer = binding.drawerLayout;
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, binding.appBarMain.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -55,6 +56,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.container);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -86,18 +97,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.pl_flag) {
-            configuration.setLocale(new Locale("pl"));
-            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-            bus.post(new PlActionEvent());
+            changeLanguageAndRefresh("pl");
         } else if (id == R.id.eng_flag) {
-            configuration.setLocale(new Locale("en"));
-            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-            bus.post(new EnActionEvent());
+            changeLanguageAndRefresh("en");
         } else if (id==R.id.exit){
             this.finishAffinity();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void changeLanguageAndRefresh(String lang) {
+        configuration.setLocale(new Locale(lang));
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        finish();
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
+        bus.post(new PlActionEvent());
     }
 
     @Override
@@ -123,12 +140,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Subscribe
-    public void onDistanceFragmentActionEvent(DistanceFragmentActionEvent event){
-        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.menu_distance);
-        showFragment(new DistanceFragment());
     }
 
     private void showFragment(Fragment fragment) {

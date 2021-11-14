@@ -119,12 +119,10 @@ public class DistanceFragment extends Fragment {
     @Subscribe
     public void onPlActionEvent(PlActionEvent event) {
         saveCurrentLanguageInSharedPreferences();
-        bus.post(new DistanceFragmentActionEvent());
     }
 
     @Subscribe
     public void onEnActionEvent(EnActionEvent event) {
         saveCurrentLanguageInSharedPreferences();
-        bus.post(new DistanceFragmentActionEvent());
     }
 }
