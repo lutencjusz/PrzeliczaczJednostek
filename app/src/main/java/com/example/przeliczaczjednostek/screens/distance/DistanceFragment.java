@@ -34,11 +34,9 @@ public class DistanceFragment extends Fragment {
     private Button btnMileL;
     private CalculateValue calculateValue;
     private DecimalFormat df;
-    private Resources resources;
     private Configuration configuration;
     private SharedPreferences sharedPreferences;
     private Bus bus;
-    private View view;
 
     private void saveCurrentLanguageInSharedPreferences() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -64,7 +62,7 @@ public class DistanceFragment extends Fragment {
         df.setMaximumFractionDigits(4);
         df.setMinimumFractionDigits(0);
         bus = ((App) getActivity().getApplication()).getBus();
-        resources = this.getResources();
+        Resources resources = this.getResources();
         configuration = resources.getConfiguration();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 //        updateContentViewAndLang(sharedPreferences.getString(getString(R.string.SharedPreferencesValue), "").equals("")
@@ -75,7 +73,7 @@ public class DistanceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_distance, container, false);
+        View view = inflater.inflate(R.layout.fragment_distance, container, false);
         bindAll(view);
         bindButtonToListener(view, btnMeter, "meter");
         bindButtonToListener(view, btnYard, "yard");
