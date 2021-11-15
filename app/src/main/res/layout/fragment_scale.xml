@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/paddingValue"
+    android:paddingRight="@dimen/paddingValue"
+    android:paddingTop="@dimen/paddingValue"
+    tools:context=".screens.scale.ScaleFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edScaleNumberLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/purple_200">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edScaleNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/value"
+            android:hint="@string/value"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnKGram"
+        style="@style/CustomButton"
+        android:text="@string/kgram" />
+
+    <Button
+        android:id="@+id/btnKarat"
+        style="@style/CustomButton"
+        android:text="@string/karat" />
+
+    <Button
+        android:id="@+id/btnFunt"
+        style="@style/CustomButton"
+        android:text="@string/funt" />
+
+    <Button
+        android:id="@+id/btnUncja"
+        style="@style/CustomButton"
+        android:text="@string/uncja" />
+
+    <Button
+        android:id="@+id/btnLut"
+        style="@style/CustomButton"
+        android:text="@string/lut" />
+
+    <Button
+        android:id="@+id/btnCentarM"
+        style="@style/CustomButton"
+        android:text="@string/centarM" />
+    <Button
+        android:id="@+id/btnCentarD"
+        style="@style/CustomButton"
+        android:text="@string/centarD" />
+
+</LinearLayout>

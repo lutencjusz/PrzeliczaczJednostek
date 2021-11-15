@@ -1,4 +1,4 @@
 package com.example.przeliczaczjednostek.events;
 
-public class EnActionEvent {
+public class RefreshActionEvent {
 }

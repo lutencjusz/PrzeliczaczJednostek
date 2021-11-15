@@ -10,6 +10,13 @@
     <string name="formatInch">%s\" (cal)</string>
     <string name="formatMileL">%s mi (mila lądowa)</string>
     <string name="formatMileM">%s Mm (mila morska)</string>
+    <string name="formatKGram" translatable="false">%s kg (kilogram)</string>
+    <string name="formatKarat" translatable="false">%s karat</string>
+    <string name="formatFunt" translatable="false">%s lb (funt)</string>
+    <string name="formatUncja" translatable="false">%s uncja</string>
+    <string name="formatLut" translatable="false">%s dr (łut)</string>
+    <string name="formatCetnarM" translatable="false">%s mały cetnar</string>
+    <string name="formatCetnarD" translatable="false">%s Duży cetnar</string>
     <string name="mileM">Mile morskie</string>
     <string name="mileL">Mile lądowe</string>
     <string name="foot">Stopa</string>
@@ -31,4 +38,12 @@
     <string name="menu_capacity">Pojemność</string>
     <string name="menu_scale">Waga</string>
     <string name="nav_exit">Zakończ</string>
+    <string name="kgram" translatable="false">Kilogram</string>
+    <string name="karat" translatable="false">Karat</string>
+    <string name="funt">Funt</string>
+    <string name="uncja">Uncja</string>
+    <string name="lut">Lut</string>
+    <string name="gran">Gran</string>
+    <string name="centarM">Mały centar</string>
+    <string name="centarD">Duży Centar</string>
 </resources>

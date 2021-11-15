@@ -1,39 +1,38 @@
 package com.example.przeliczaczjednostek;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
 import com.example.przeliczaczjednostek.databinding.ActivityMainBinding;
-import com.example.przeliczaczjednostek.events.PlActionEvent;
-import com.example.przeliczaczjednostek.screens.distance.DistanceFragment;
 import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import com.squareup.otto.Bus;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private Bus bus;
     private Resources resources;
     private Configuration configuration;
+    private NavController navController;
+    private App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bus = ((App) getApplication()).getBus();
+
+        app = (App) getApplication();
         resources = getResources();
         configuration = resources.getConfiguration();
+        app.setActiveNav(R.id.nav_distance);
 
         com.example.przeliczaczjednostek.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -42,15 +41,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_distance_mobile, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_distance_mobile, R.id.nav_scale_mobile)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.container);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
 
     @Override
@@ -61,18 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        bus.register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        bus.unregister(this);
     }
 
     @Override
@@ -95,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             changeLanguageAndRefresh("pl");
         } else if (id == R.id.eng_flag) {
             changeLanguageAndRefresh("en");
-        } else if (id==R.id.exit){
+        } else if (id == R.id.exit) {
             this.finish();
         }
 
@@ -103,18 +93,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void changeLanguageAndRefresh(String lang) {
-        configuration.setLocale(new Locale(lang));
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        LocaleHelper.setLocale(this, lang);
         finish();
-        overridePendingTransition( 0, 0);
+        overridePendingTransition(0, 0);
         startActivity(getIntent());
-        overridePendingTransition( 0, 0);
-        bus.post(new PlActionEvent());
+        overridePendingTransition(0, 0);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.container);
+        navController = Navigation.findNavController(this, R.id.container);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -122,12 +110,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_distance) {
-            showFragment(new DistanceFragment());
-        } else if (id == R.id.nav_scale) {
-
-        } else if (id == R.id.nav_capacity) {
-
+        if (id == R.id.nav_distance && id != app.getActiveNav()) {
+            app.setActiveNav(id);
+            navController.navigate(R.id.action_nav_scale_mobile_to_nav_distance_mobile);
+        } else if (id == R.id.nav_scale && id != app.getActiveNav()) {
+            app.setActiveNav(id);
+            navController.navigate(R.id.action_nav_distance_mobile_to_nav_scale_mobile);
         } else if (id == R.id.nav_exit) {
             this.finish();
         }
@@ -135,11 +123,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void showFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
     }
 }

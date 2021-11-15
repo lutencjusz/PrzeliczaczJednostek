@@ -3,24 +3,14 @@ package com.example.przeliczaczjednostek.screens.distance;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import com.example.przeliczaczjednostek.App;
 import com.example.przeliczaczjednostek.CalculateValue;
-import com.example.przeliczaczjednostek.events.EnActionEvent;
-import com.example.przeliczaczjednostek.events.PlActionEvent;
 import com.example.przeliczaczjednostek.R;
-import com.example.przeliczaczjednostek.events.DistanceFragmentActionEvent;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 import java.text.DecimalFormat;
 
 public class DistanceFragment extends Fragment {
@@ -34,15 +24,7 @@ public class DistanceFragment extends Fragment {
     private Button btnMileL;
     private CalculateValue calculateValue;
     private DecimalFormat df;
-    private Configuration configuration;
-    private SharedPreferences sharedPreferences;
-    private Bus bus;
 
-    private void saveCurrentLanguageInSharedPreferences() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(getString(R.string.SharedPreferencesValue), configuration.getLocales().get(0).getLanguage());
-        editor.apply();
-    }
 
     private void bindAll(View view) {
         btnMeter = view.findViewById(R.id.btnMeter);
@@ -61,13 +43,6 @@ public class DistanceFragment extends Fragment {
         df = new DecimalFormat();
         df.setMaximumFractionDigits(4);
         df.setMinimumFractionDigits(0);
-        bus = ((App) getActivity().getApplication()).getBus();
-        Resources resources = this.getResources();
-        configuration = resources.getConfiguration();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-//        updateContentViewAndLang(sharedPreferences.getString(getString(R.string.SharedPreferencesValue), "").equals("")
-//                ? configuration.getLocales().get(0)
-//              : new Locale(sharedPreferences.getString(getString(R.string.SharedPreferencesValue), "")));
     }
 
     @Nullable
@@ -102,27 +77,5 @@ public class DistanceFragment extends Fragment {
                 btnMileM.setText(String.format(getString(R.string.formatMileM), df.format(calculateValue.getMileM())));
             }
         });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        bus.register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        bus.unregister(this);
-    }
-
-    @Subscribe
-    public void onPlActionEvent(PlActionEvent event) {
-        saveCurrentLanguageInSharedPreferences();
-    }
-
-    @Subscribe
-    public void onEnActionEvent(EnActionEvent event) {
-        saveCurrentLanguageInSharedPreferences();
     }
 }

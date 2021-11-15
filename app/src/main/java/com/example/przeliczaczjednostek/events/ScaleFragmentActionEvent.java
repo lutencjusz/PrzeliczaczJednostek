@@ -1,5 +1,4 @@
 package com.example.przeliczaczjednostek.events;
 
-public class PlActionEvent {
-
+public class ScaleFragmentActionEvent {
 }

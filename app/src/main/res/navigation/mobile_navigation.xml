@@ -9,13 +9,21 @@
         android:id="@+id/nav_distance_mobile"
         android:name="com.example.przeliczaczjednostek.screens.distance.DistanceFragment"
         android:label="@string/menu_distance"
-        tools:layout="@layout/fragment_distance" />
+        tools:layout="@layout/fragment_distance" >
+        <action
+            android:id="@+id/action_nav_distance_mobile_to_nav_scale_mobile"
+            app:destination="@id/nav_scale_mobile" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.przeliczaczjednostek.screens.distance.DistanceFragment"
-        android:label="@string/menu_capacity"
-        tools:layout="@layout/fragment_distance" />
+        android:id="@+id/nav_scale_mobile"
+        android:name="com.example.przeliczaczjednostek.screens.scale.ScaleFragment"
+        android:label="@string/menu_scale"
+        tools:layout="@layout/fragment_scale" >
+        <action
+            android:id="@+id/action_nav_scale_mobile_to_nav_distance_mobile"
+            app:destination="@id/nav_distance_mobile" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"
