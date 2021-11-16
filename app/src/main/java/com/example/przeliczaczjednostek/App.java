@@ -2,7 +2,6 @@ package com.example.przeliczaczjednostek;
 
 import android.app.Application;
 import android.content.Context;
-import com.squareup.otto.Bus;
 
 public class App extends Application {
 
