@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.przeliczaczjednostek.CalculateValue;
 import com.example.przeliczaczjednostek.R;
-import com.squareup.otto.Bus;
 import java.text.DecimalFormat;
 
 public class ScaleFragment extends Fragment {
