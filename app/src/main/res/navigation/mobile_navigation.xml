@@ -25,9 +25,4 @@
             app:destination="@id/nav_distance_mobile" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.przeliczaczjednostek.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_scale"
-        tools:layout="@layout/fragment_slideshow" />
 </navigation>
