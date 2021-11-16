@@ -94,61 +94,61 @@ public class CalculateValue {
     public void calculateKarat(double value) {
         this.karat = value;
         this.kgram = value / KARAT;
-        this.funt = value * FUNT;
-        this.uncja = value * UNCJA;
-        this.lut = value * LUT;
-        this.cetnarD = value * CETNARD;
-        this.cetnarM = value * CETNARM;
+        this.funt = this.kgram  * FUNT;
+        this.uncja = this.kgram  * UNCJA;
+        this.lut = this.kgram  * LUT;
+        this.cetnarD = this.kgram  * CETNARD;
+        this.cetnarM = this.kgram  * CETNARM;
     }
 
     public void calculateFunt(double value) {
         this.funt = value;
         this.kgram = value / FUNT;
-        this.karat = value * KARAT;
-        this.uncja = value * UNCJA;
-        this.lut = value * LUT;
-        this.cetnarD = value * CETNARD;
-        this.cetnarM = value * CETNARM;
+        this.karat = this.kgram  * KARAT;
+        this.uncja = this.kgram  * UNCJA;
+        this.lut = this.kgram  * LUT;
+        this.cetnarD = this.kgram  * CETNARD;
+        this.cetnarM = this.kgram  * CETNARM;
     }
 
     public void calculateUncja(double value) {
         this.uncja = value;
         this.kgram = value / UNCJA;
-        this.karat = value * KARAT;
-        this.funt = value * FUNT;
-        this.lut = value * LUT;
-        this.cetnarD = value * CETNARD;
-        this.cetnarM = value * CETNARM;
+        this.karat = this.kgram  * KARAT;
+        this.funt = this.kgram  * FUNT;
+        this.lut = this.kgram  * LUT;
+        this.cetnarD = this.kgram  * CETNARD;
+        this.cetnarM = this.kgram  * CETNARM;
     }
 
     public void calculateLut(double value) {
         this.lut = value;
         this.kgram = value / LUT;
-        this.karat = value * KARAT;
-        this.funt = value * FUNT;
-        this.uncja = value * UNCJA;
-        this.cetnarD = value * CETNARD;
-        this.cetnarM = value * CETNARM;
+        this.karat = this.kgram  * KARAT;
+        this.funt = this.kgram  * FUNT;
+        this.uncja = this.kgram  * UNCJA;
+        this.cetnarD = this.kgram  * CETNARD;
+        this.cetnarM = this.kgram  * CETNARM;
     }
 
     public void calculateCetnarM(double value) {
         this.cetnarM = value;
         this.kgram = value / CETNARM;
-        this.karat = value * KARAT;
-        this.funt = value * FUNT;
-        this.uncja = value * UNCJA;
-        this.lut = value * LUT;
-        this.cetnarM = value * CETNARM;
+        this.karat = this.kgram  * KARAT;
+        this.funt = this.kgram  * FUNT;
+        this.uncja = this.kgram  * UNCJA;
+        this.lut = this.kgram  * LUT;
+        this.cetnarM = this.kgram  * CETNARM;
     }
 
     public void calculateCetnarD(double value) {
         this.cetnarD = value;
         this.kgram = value / CETNARD;
-        this.karat = value * KARAT;
-        this.funt = value * FUNT;
-        this.uncja = value * UNCJA;
-        this.lut = value * LUT;
-        this.cetnarM = value * CETNARM;
+        this.karat = this.kgram  * KARAT;
+        this.funt = this.kgram  * FUNT;
+        this.uncja = this.kgram  * UNCJA;
+        this.lut = this.kgram  * LUT;
+        this.cetnarM = this.kgram  * CETNARM;
     }
 
     public double getMeter() {
