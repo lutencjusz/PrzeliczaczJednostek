@@ -204,32 +204,46 @@ public class CalculateValue {
     }
 
     public void calculate(double value, String unit) {
-        if (unit.equals("meter")) {
-            calculateMeter(value);
-        } else if (unit.equals("yard")) {
-            calculateYard(value);
-        } else if (unit.equals("feet")) {
-            calculateFeet(value);
-        } else if (unit.equals("inch")) {
-            calculateInch(value);
-        } else if (unit.equals("mileL")) {
-            calculateMileL(value);
-        } else if (unit.equals("mileM")) {
-            calculateMileM(value);
-        } else if (unit.equals("kgram")) {
-            calculateKGram(value);
-        } else if (unit.equals("karat")) {
-            calculateKarat(value);
-        } else if (unit.equals("funt")) {
-            calculateFunt(value);
-        } else if (unit.equals("uncja")) {
-            calculateUncja(value);
-        } else if (unit.equals("lut")) {
-            calculateLut(value);
-        } else if (unit.equals("centarM")) {
-            calculateCetnarM(value);
-        } else if (unit.equals("centarD")) {
-            calculateCetnarD(value);
+        switch (unit) {
+            case "meter":
+                calculateMeter(value);
+                break;
+            case "yard":
+                calculateYard(value);
+                break;
+            case "feet":
+                calculateFeet(value);
+                break;
+            case "inch":
+                calculateInch(value);
+                break;
+            case "mileL":
+                calculateMileL(value);
+                break;
+            case "mileM":
+                calculateMileM(value);
+                break;
+            case "kgram":
+                calculateKGram(value);
+                break;
+            case "karat":
+                calculateKarat(value);
+                break;
+            case "funt":
+                calculateFunt(value);
+                break;
+            case "uncja":
+                calculateUncja(value);
+                break;
+            case "lut":
+                calculateLut(value);
+                break;
+            case "centarM":
+                calculateCetnarM(value);
+                break;
+            case "centarD":
+                calculateCetnarD(value);
+                break;
         }
     }
 }
